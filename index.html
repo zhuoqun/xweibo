@@ -29,24 +29,14 @@
 
     <div class="container">
       <div class="row">
-        <h1>我的微博列表</h1>
         <div class="span8 wblist">
 
-          <div class="row item">
-            <div class="span7 content">
-              哈，別把夢想建立在一個樂隊的身上噢，真正的人生夢想在你的手上。可以很大如倔強征服鳥巢，也能很小如曬太陽發呆。...留個小小的遺憾，讓回憶帶一點酸，人生也許會更甜美。:)
+          <div class="row">
+            <div class="span7">
+              <h1>我的微博列表</h1>
             </div>
-            <div class="span1 ctrl">
-              <input type="checkbox" />
-            </div>
-          </div>
-
-          <div class="row item">
-            <div class="span7 content">
-              哈，別把夢想建立在一個樂隊的身上噢，真正的人生夢想在你的手上。可以很大如倔強征服鳥巢，也能很小如曬太陽發呆。...留個小小的遺憾，讓回憶帶一點酸，人生也許會更甜美。:)
-            </div>
-            <div class="span1 ctrl">
-              <input type="checkbox" />
+            <div class="span1">
+              <input type="checkbox" class="check_all" /> 全选
             </div>
           </div>
 
@@ -92,6 +82,33 @@
             </div>
             <div class="span1 ctrl">
               <input type="checkbox" />
+            </div>
+          </div>
+
+          <div class="row item">
+            <div class="span7 content">
+              哈，別把夢想建立在一個樂隊的身上噢，真正的人生夢想在你的手上。可以很大如倔強征服鳥巢，也能很小如曬太陽發呆。...留個小小的遺憾，讓回憶帶一點酸，人生也許會更甜美。:)
+            </div>
+            <div class="span1 ctrl">
+              <input type="checkbox" />
+            </div>
+          </div>
+
+          <div class="row item">
+            <div class="span7 content">
+              哈，別把夢想建立在一個樂隊的身上噢，真正的人生夢想在你的手上。可以很大如倔強征服鳥巢，也能很小如曬太陽發呆。...留個小小的遺憾，讓回憶帶一點酸，人生也許會更甜美。:)
+            </div>
+            <div class="span1 ctrl">
+              <input type="checkbox" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="span7">
+              &nbsp;
+            </div>
+            <div class="span1 bottom_ctrl">
+              <input type="checkbox" class="check_all" /> 全选
             </div>
           </div>
 
@@ -124,18 +141,45 @@
         $('.wblist').on('click', '.item', function(e){
           $(this).toggleClass('selected');
 
-          if ($(this).find('input').attr('checked')) {
-            $(this).find('input').attr('checked', false);
+          console.log($(e.target).prop('tagName'));
+          var isCheckbox = $(e.target).prop('tagName') == 'INPUT';
+
+          if ($(this).find('input').prop('checked')) {
+            if (!isCheckbox) {
+              $(this).find('input').prop('checked', false);
+            }
+            $('.check_all').prop('checked', false);
           } else {
-            $(this).find('input').attr('checked', 'checked');
+            if (!isCheckbox) {
+              $(this).find('input').prop('checked', true);
+            }
           }
 
-          if ($('.wblist .selected').length == 0) {
-            $('#del_btn').attr('disabled', 'disabled');
-          } else {
-            $('#del_btn').attr('disabled', false);
-          }
+          toggleDelBtn();
         });
+
+        $('.check_all').change(function(){
+
+          if ($(this).prop('checked')) {
+            $('.check_all').prop('checked', true);
+            $('.item').addClass('selected');
+            $('.item input').prop('checked', true);
+            toggleDelBtn();
+          } else {
+            $('.check_all').prop('checked', false);
+            $('.item').removeClass('selected');
+            $('.item input').prop('checked', false);
+            toggleDelBtn();
+          }
+          });
+
+        function toggleDelBtn() {
+          if ($('.wblist .selected').length == 0) {
+            $('#del_btn').prop('disabled', true);
+          } else {
+            $('#del_btn').prop('disabled', false);
+          }
+        }
       });
     </script>
   </body>
