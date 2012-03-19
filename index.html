@@ -38,7 +38,7 @@
             </div>
           </div>
 
-          <div class="row item selected">
+          <div class="row item">
             <div class="span7 content">
               哈，別把夢想建立在一個樂隊的身上噢，真正的人生夢想在你的手上。可以很大如倔強征服鳥巢，也能很小如曬太陽發呆。...留個小小的遺憾，讓回憶帶一點酸，人生也許會更甜美。:)
             </div>
@@ -57,6 +57,21 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
+        $('.wblist').on('click', '.item', function(e){
+          $(this).toggleClass('selected');
+
+          if ($(this).find('input').attr('checked')) {
+            $(this).find('input').attr('checked', false);
+          } else {
+            $(this).find('input').attr('checked', 'checked');
+          }
+
+          if ($('.wblist .selected').length == 0) {
+            $('#del_btn').attr('disabled', 'disabled');
+          } else {
+            $('#del_btn').attr('disabled', false);
+          }
+        });
       });
     </script>
   </body>

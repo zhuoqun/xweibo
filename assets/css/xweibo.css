@@ -2,9 +2,9 @@ body {padding-top:70px;}
 h1 {font-size:18px; line-height:22px; padding-bottom:1em;}
 
 .item {border-bottom:1px solid #ddd; padding:1.4em 0; cursor:pointer;}
-.item:hover {background:#ddd; border:none;}
+.item:hover {background:#ddd;}
 
 .selected {background:#913420; color:#eee; border:none;}
-.selected:hover {background:#913420;}
+.selected:hover {background:#b82b14;}
 
 #del_btn {position:fixed; top:15em; right:10em;}
