@@ -5,6 +5,9 @@ h1 {font-size:18px; line-height:22px; padding-bottom:1em;}
 .item:hover {background:#ddd;}
 
 .selected {background:#913420; color:#eee; border:none;}
-.selected:hover {background:#b82b14;}
+.selected:hover {background:#a22b14;}
 
 #del_btn {position:fixed; top:15em; right:10em;}
+.pagination {text-align:center;}
+
+.footer {border-top:1px solid #e5e5e5; margin-top:25px; padding:35px 0 36px;}
