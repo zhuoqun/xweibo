@@ -11,4 +11,4 @@ h1 {font-size:18px; line-height:22px; padding-bottom:1em;}
 #del_btn {position:fixed; top:15em; right:10em;}
 .pagination {text-align:center;}
 
-.footer {border-top:1px solid #e5e5e5; margin-top:25px; padding:35px 0 36px;}
+.footer {border-top:1px solid #e5e5e5; margin-top:15px; padding:25px 0 26px; text-align:center; color:#555;}
