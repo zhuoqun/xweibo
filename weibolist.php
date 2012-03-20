@@ -47,7 +47,7 @@ $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
               <h1>我的微博列表</h1>
             </div>
             <div class="span1">
-              <input type="checkbox" class="check_all" checked="false" /> 全选
+              <input type="checkbox" class="check_all" /> 全选
             </div>
           </div>
 <?php
@@ -67,7 +67,7 @@ if (is_array($ms['statuses'])) {
 
       $retweet = <<<HTML
               <div class="retweet">
-                <p>{$retweeted_status['text']}</p>
+                <p>{$retweeted_status['user']['screen_name']}: {$retweeted_status['text']}</p>
                 {$retweeted_img}
               </div>
 HTML;
@@ -86,7 +86,7 @@ HTML;
               {$retweet}
             </div>
             <div class="span1 ctrl">
-              <input type="checkbox" checked="false" />
+              <input type="checkbox" />
             </div>
           </div>
 HTML;
@@ -100,7 +100,7 @@ HTML;
               &nbsp;
             </div>
             <div class="span1 bottom_ctrl">
-              <input type="checkbox" class="check_all" checked="false" /> 全选
+              <input type="checkbox" class="check_all" /> 全选
             </div>
           </div>
 
