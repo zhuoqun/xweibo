@@ -1,16 +1,3 @@
-<!DOCTYPE html> 
-<html> 
-  <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>微博批量删</title> 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/xweibo.css" />
-  </head>
-
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span12 auth">
 <?php
 session_start();
 
@@ -32,6 +19,23 @@ if (isset($_REQUEST['code'])) {
 if ($token) {
   $_SESSION['token'] = $token;
   setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+}
+?>
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>微博批量删</title> 
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/xweibo.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12 auth">
+<?php
+if ($token) {
 ?>
           <h1>授权成功。马上为您跳转到微博列表页面。</h1>
 <?php
