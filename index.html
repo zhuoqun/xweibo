@@ -156,6 +156,8 @@
           } else {
             if (!isCheckbox) {
               $(this).find('input').prop('checked', true);
+            } else {
+              $('.check_all').prop('checked', false);
             }
           }
 
