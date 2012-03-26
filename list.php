@@ -4,12 +4,16 @@ session_start();
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
 
-$page = 1;
-
 $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
 $uid = $c->get_uid();
 $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
+
+$page = 1;
+$rows_per_page = 50;
+$total_rows = intval($user_message['statuses_count']);
+
+$last_page = ceil($total_rows / $rows_per_page);
 
 $ms  = $c->user_timeline_by_id($uid, $page);
 
@@ -45,7 +49,7 @@ $ms  = $c->user_timeline_by_id($uid, $page);
 
           <div class="row">
             <div class="span7">
-              <h1>我的微博列表</h1>
+              <h1>我的微博列表 <span>(共 <?php echo $total_rows; ?> 条)</span></h1>
             </div>
             <div class="span1">
               <input type="checkbox" class="check_all" /> 全选
