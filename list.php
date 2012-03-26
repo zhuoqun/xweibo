@@ -4,16 +4,28 @@ session_start();
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
 
+// if not access the auth
+if (!isset($_SESSION['token']) || empty($_SESSION['token']) || empty($_SESSION['token']['access_token']))
+{
+  header('Location:http://mapp.cc/xweibo/');
+  die;
+}
+
 $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
 $uid = $c->get_uid();
 $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 
-$page = 1;
+define('SHOW_PAGES', 9);
+
 $rows_per_page = 50;
 $total_rows = intval($user_message['statuses_count']);
-
 $last_page = ceil($total_rows / $rows_per_page);
+
+$page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+
+if ($page < 1) $page = 1;
+if ($page > $last_page) $page = $last_page;
 
 $ms  = $c->user_timeline_by_id($uid, $page);
 
@@ -111,6 +123,40 @@ HTML;
 
           <div class="pagination">
             <ul>
+<?php
+$pagination = '';
+
+$first_page_class = ($page == 1) ? ' class="disabled"' : '';
+$last_page_class = ($page == $last_page) ? ' class="disabled"' : '';
+
+$pagination .=<<<HTML
+              <li{$first_page_class}><a href="?page=1">«</a></li>
+HTML;
+
+if ($last_page <= SHOW_PAGES)
+{
+  for ($i=1; $i <= $last_page; $i++)
+  {
+    $active_class = ($i == $page) ? ' class="active"' : '';
+    $pagination .=<<<HTML
+              <li{$active_class}><a href="?page={$i}">{$i}</a></li>
+HTML;
+  }
+}
+else
+{
+  $pagination .=<<<HTML
+              <li><a href="?page=1">1</a></li>
+              <li><a href="?page=2">2</a></li>
+              <li class="disabled"><a>...</a></li>
+HTML;
+  }
+}
+
+$pagination .=<<<HTML
+              <li{$last_page_class}><a href="?page={$last_page}">»</a></li>
+HTML;
+?>
               <li class="disabled"><a href="#">«</a></li>
               <li class="active">
               <a href="#">1</a>
