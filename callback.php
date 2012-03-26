@@ -38,10 +38,16 @@ if ($token) {
 if ($token) {
 ?>
           <h1>授权成功。马上为您跳转到微博列表页面。</h1>
+  <script>
+  function redirect(){ 
+    window.location = "http://mapp.cc/xweibo/list.php"; 
+  } 
+  setTimeout('redirect()',3000);
+  </script>
 <?php
 } else {
 ?>
-          <h1>授权失败，请返回首页重试。</h1>
+          <h1>授权失败，请返回 <a href="http://mapp.cc/xweibo/">首页</a> 重试。</h1>
 <?php
 }
 ?>
