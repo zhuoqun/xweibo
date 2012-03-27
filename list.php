@@ -23,6 +23,16 @@ if (isset($_POST['del_ids']) && !empty($_POST['del_ids']))
   foreach ($id_arr as $id)
   {
     $result = $c->delete($id);
+
+    if (isset($result['error']) && !empty($result['error']))
+    {
+      // fail
+      error_log("id:". $id ." -- error:" .$result['error']. " -- error_code:" .$result['error_code']. "\n\n");
+    }
+    else
+    {
+      //success
+    }
   }
 }
 
