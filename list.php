@@ -151,7 +151,7 @@ HTML;
 }
 else
 {
-  if ($page < (SHOW_PAGES - 1)/2 + 3)
+  if ($page <= (SHOW_PAGES - 1)/2 + 3)
   {
     for ($i=1; $i <= SHOW_PAGES + 2; $i++)
     {
@@ -178,7 +178,7 @@ HTML;
     $section_tail = $last_page - 3 - (SHOW_PAGES - 1)/2;
     if ($page > $section_tail) 
     {
-      for ($i = $last_page - SHOW_PAGES - 2; $i <= $last_page; $i++)
+      for ($i = $last_page - SHOW_PAGES - 1; $i <= $last_page; $i++)
       {
         $active_class = ($i == $page) ? ' class="active"' : '';
         $pagination .=<<<HTML
