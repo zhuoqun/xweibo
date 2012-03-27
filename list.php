@@ -16,7 +16,7 @@ $uid = $c->get_uid();
 $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 
-define('SHOW_PAGES', 9);
+define('SHOW_PAGES', 5);
 
 $rows_per_page = 50;
 $total_rows = intval($user_message['statuses_count']);
@@ -133,7 +133,7 @@ $pagination .=<<<HTML
               <li{$first_page_class}><a href="?page=1">«</a></li>
 HTML;
 
-if ($last_page <= SHOW_PAGES)
+if ($last_page <= SHOW_PAGES + 4)
 {
   for ($i=1; $i <= $last_page; $i++)
   {
