@@ -69,16 +69,20 @@ $ms  = $c->user_timeline_by_id($uid, $page);
           </div>
 <?php
 
-if (is_array($ms['statuses'])) {
-  foreach ($ms['statuses'] as $item) {
+if (is_array($ms['statuses']))
+{
+  foreach ($ms['statuses'] as $item)
+  {
 
     $retweet = '';
-    if (isset($item['retweeted_status']) && !empty($item['retweeted_status'])) {
+    if (isset($item['retweeted_status']) && !empty($item['retweeted_status']))
+    {
 
       $retweeted_status = $item['retweeted_status'];
 
       $retweeted_img = '';
-      if (isset($retweeted_status['thumbnail_pic']) && !empty($retweeted_status['thumbnail_pic'])) {
+      if (isset($retweeted_status['thumbnail_pic']) && !empty($retweeted_status['thumbnail_pic']))
+      {
         $retweeted_img = '<img src="'. $retweeted_status['thumbnail_pic'] .'" />';
       }
 
@@ -91,7 +95,8 @@ HTML;
     }
 
     $thumbnail = '';
-    if (isset($item['thumbnail_pic']) && !empty($item['thumbnail_pic'])) {
+    if (isset($item['thumbnail_pic']) && !empty($item['thumbnail_pic']))
+    {
         $thumbnail = '<img src="'. $item['thumbnail_pic'] .'" />';
     }
 
@@ -128,6 +133,7 @@ $pagination = '';
 
 $first_page_class = ($page == 1) ? ' class="disabled"' : '';
 $last_page_class = ($page == $last_page) ? ' class="disabled"' : '';
+$second_to_last = $last_page - 1;
 
 $pagination .=<<<HTML
               <li{$first_page_class}><a href="?page=1">«</a></li>
@@ -145,29 +151,66 @@ HTML;
 }
 else
 {
-  $pagination .=<<<HTML
+  if ($page < (SHOW_PAGES - 1)/2 + 3)
+  {
+    for ($i=1; $i <= SHOW_PAGES + 2; $i++)
+    {
+      $active_class = ($i == $page) ? ' class="active"' : '';
+      $pagination .=<<<HTML
+              <li{$active_class}><a href="?page={$i}">{$i}</a></li>
+HTML;
+    }
+
+    $pagination .=<<<HTML
+              <li class="disabled"><a>...</a></li>
+              <li><a href="?page={$second_to_last}">{$second_to_last}</a></li>
+              <li><a href="?page={$last_page}">{$last_page}</a></li>
+HTML;
+  } 
+  else
+  {
+    $pagination .=<<<HTML
               <li><a href="?page=1">1</a></li>
               <li><a href="?page=2">2</a></li>
               <li class="disabled"><a>...</a></li>
 HTML;
+
+    $section_tail = $last_page - 3 - (SHOW_PAGES - 1)/2;
+    if ($page > $section_tail) 
+    {
+      for ($i = $last_page - SHOW_PAGES - 2; $i <= $last_page; $i++)
+      {
+        $active_class = ($i == $page) ? ' class="active"' : '';
+        $pagination .=<<<HTML
+              <li{$active_class}><a href="?page={$i}">{$i}</a></li>
+HTML;
+      }
+    }
+    else
+    {
+      for ($i = $page - (SHOW_PAGES - 1)/2; $i <= $page + (SHOW_PAGES - 1)/2; $i++)
+      {
+        $active_class = ($i == $page) ? ' class="active"' : '';
+        $pagination .=<<<HTML
+              <li{$active_class}><a href="?page={$i}">{$i}</a></li>
+HTML;
+      }
+
+      $pagination .=<<<HTML
+              <li class="disabled"><a>...</a></li>
+              <li><a href="?page={$second_to_last}">{$second_to_last}</a></li>
+              <li><a href="?page={$last_page}">{$last_page}</a></li>
+HTML;
+    }
   }
 }
 
 $pagination .=<<<HTML
               <li{$last_page_class}><a href="?page={$last_page}">»</a></li>
 HTML;
+
+echo $pagination;
 ?>
-              <li class="disabled"><a href="#">«</a></li>
-              <li class="active">
-              <a href="#">1</a>
-              </li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li class="disabled"><a href="#">...</a></li>
-              <li><a href="#">10</a></li>
-              <li><a href="#">11</a></li>
-              <li><a href="#">»</a></li>
             </ul>
           </div>
         </div>
