@@ -101,7 +101,7 @@ HTML;
     }
 
     echo <<<HTML
-          <div class="row item">
+          <div id="{$item['id']}" class="row item">
             <div class="span7 content">
               <p>{$item['text']}</p>
               {$thumbnail}
@@ -216,6 +216,9 @@ echo $pagination;
         </div>
 
         <div class="span4">
+          <form id="del_form" method="post" action="">
+            <input type="hidden" id="del_ids" />
+          </form>
           <button id="del_btn" class="btn btn-danger btn-large" disabled="disabled"><i class="icon-trash icon-white"></i> 批量删除</button>
         </div>
       </div>
@@ -228,6 +231,9 @@ echo $pagination;
 
     <script type="text/javascript">
       $(document).ready(function(){
+
+        var id_arr = [];
+
         $('.wblist').on('click', '.item', function(e){
           $(this).toggleClass('selected');
 
@@ -263,12 +269,25 @@ echo $pagination;
           });
 
         function toggleDelBtn() {
-          if ($('.wblist .selected').length == 0) {
+          var selected_items = $('.wblist .selected');
+          if (selected_items.length == 0) {
             $('#del_btn').prop('disabled', true);
           } else {
+            id_arr = [];
+
+            selected_items.each(function(){
+              id_arr.push($(this).attr('id'));
+            });
+
             $('#del_btn').prop('disabled', false);
           }
         }
+
+        $('#del_btn').click(function(e){
+          e.preventDefault();
+          $('#del_ids').val(id_arr.join(','));
+          $('#del_form').submit();
+        });
       });
     </script>
 

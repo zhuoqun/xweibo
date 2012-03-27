@@ -12,6 +12,7 @@ h1 span {font-size:14px; font-weight:400; color:#0088cc;}
 .bottom_ctrl {padding-top:1em;}
 
 #del_btn {position:fixed; top:15em; right:10em;}
+#del_form {display:none;}
 .pagination {text-align:center;}
 
 .footer {border-top:1px solid #e5e5e5; margin-top:15px; padding:25px 0 26px; text-align:center; color:#555;}
