@@ -16,6 +16,22 @@ $uid = $c->get_uid();
 $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 
+// Delete weibo by ids
+if (isset($_POST['del_ids']) && !empty($_POST['del_ids']))
+{
+  $id_arr = explode(',', $_POST['del_ids']);
+  foreach ($id_arr as $id)
+  {
+    $result = $c->delete($id);
+  }
+}
+
+$form_action = 'http://mapp.cc/xweibo/list.php';
+if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']))
+{
+  $form_action .= '?'.$_SERVER['QUERY_STRING'];
+}
+
 define('SHOW_PAGES', 5);
 
 $rows_per_page = 50;
@@ -216,8 +232,8 @@ echo $pagination;
         </div>
 
         <div class="span4">
-          <form id="del_form" method="post" action="">
-            <input type="hidden" id="del_ids" />
+          <form id="del_form" method="post" action="<?php echo $form_action; ?>">
+            <input type="hidden" id="del_ids" name="del_ids" />
           </form>
           <button id="del_btn" class="btn btn-danger btn-large" disabled="disabled"><i class="icon-trash icon-white"></i> 批量删除</button>
         </div>
