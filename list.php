@@ -109,6 +109,8 @@ $ms  = $c->user_timeline_by_id($uid, $page);
       <div class="row">
         <div class="span8 wblist">
 
+<?php echo $tip; ?>
+
           <div class="row">
             <div class="span7">
               <h1>我的微博列表 <span>(共 <?php echo $total_rows; ?> 条)</span></h1>
