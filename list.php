@@ -61,10 +61,13 @@ HTML;
 }
 
 $form_action = 'http://mapp.cc/xweibo/list.php';
+
+/* for paginame bug
 if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']))
 {
   $form_action .= '?'.$_SERVER['QUERY_STRING'];
 }
+ */
 
 define('SHOW_PAGES', 5);
 
