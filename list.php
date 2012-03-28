@@ -98,7 +98,7 @@ $ms  = $c->user_timeline_by_id($uid, $page);
           <div class="nav-collapse">
             <ul class="nav">
               <li class="divider-vertical"></li>
-              <li><a href="#">关于</a></li>
+              <li><a href="http://www.douban.com/note/207231362/" target="_blank">关于</a></li>
             </ul>
           </div>
         </div>
