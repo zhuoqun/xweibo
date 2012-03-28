@@ -94,7 +94,7 @@ $ms  = $c->user_timeline_by_id($uid, $page);
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="http://mapp.cc/xweibo/">微博批量删</a>
+          <a class="brand" href="http://mapp.cc/xweibo/list.php">微博批量删</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="divider-vertical"></li>
