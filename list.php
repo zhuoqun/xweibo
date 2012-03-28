@@ -17,6 +17,7 @@ $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 
 // Delete weibo by ids
+$tip = '';
 if (isset($_POST['del_ids']) && !empty($_POST['del_ids']))
 {
   $id_arr = explode(',', $_POST['del_ids']);
@@ -27,11 +28,34 @@ if (isset($_POST['del_ids']) && !empty($_POST['del_ids']))
     if (isset($result['error']) && !empty($result['error']))
     {
       // fail
+      $err_content = "错误原因:" .$result['error']. " -- 错误代码:" .$result['error_code'];
       error_log("id:". $id ." -- error:" .$result['error']. " -- error_code:" .$result['error_code']. "\n\n");
+      $tip =<<<HTML
+          <div id="tip_error" class="row">
+            <div class="span7">
+              <div class="error">
+                删除失败：{$err_content}
+              </div>
+            </div>
+            <div class="span1">
+            </div>
+          </div>
+HTML;
     }
     else
     {
       //success
+      $tip =<<<HTML
+          <div id="tip_success" class="row">
+            <div class="span7">
+              <div class="success">
+                删除成功！
+              </div>
+            </div>
+            <div class="span1">
+            </div>
+          </div>
+HTML;
     }
   }
 }
@@ -314,6 +338,10 @@ echo $pagination;
           $('#del_ids').val(id_arr.join(','));
           $('#del_form').submit();
         });
+
+        if($('#tip_success')) {
+          setTimeout(function(){$('#tip_success').remove();}, 3000);
+        }
       });
     </script>
 
