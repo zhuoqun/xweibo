@@ -16,9 +16,24 @@ $uid = $c->get_uid();
 $uid = $uid['uid'];
 $user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 
-// Delete weibo by ids
 $tip = '';
-if (isset($_POST['del_ids']) && !empty($_POST['del_ids']))
+if (isset($user_message['error']) && !empty($user_message['error']))
+{
+  $tip =<<<HTML
+          <div id="tip_error" class="row">
+            <div class="span7">
+              <div class="error">
+  由于新浪微博 API 的请求限制，服务暂时无法使用，请稍后重试，谢谢 :)
+              </div>
+            </div>
+            <div class="span1">
+            </div>
+          </div>
+HTML;
+}
+
+// Delete weibo by ids
+if (isset($_POST['del_ids']) && !empty($_POST['del_ids']) && empty($tip))
 {
   $id_arr = explode(',', $_POST['del_ids']);
   foreach ($id_arr as $id)
