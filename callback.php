@@ -37,17 +37,17 @@ if ($token) {
 <?php
 if ($token) {
 ?>
-          <h1>授权成功。马上为您跳转到 <a href="http://mapp.cc/xweibo/list.php">微博列表</a> 。</h1>
+          <h1>授权成功。马上为您跳转到 <a href="http://xweibo.mapp.cc/list.php">微博列表</a> 。</h1>
   <script>
   function redirect(){ 
-    window.location = "http://mapp.cc/xweibo/list.php"; 
+    window.location = "http://xweibo.mapp.cc/list.php"; 
   } 
   setTimeout('redirect()',3000);
   </script>
 <?php
 } else {
 ?>
-          <h1>授权失败，请返回 <a href="http://mapp.cc/xweibo/">首页</a> 重试。</h1>
+          <h1>授权失败，请返回 <a href="http://xweibo.mapp.cc/">首页</a> 重试。</h1>
 <?php
 }
 ?>

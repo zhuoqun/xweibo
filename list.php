@@ -7,7 +7,7 @@ include_once( 'saetv2.ex.class.php' );
 // if not access the auth
 if (!isset($_SESSION['token']) || empty($_SESSION['token']) || empty($_SESSION['token']['access_token']))
 {
-  header('Location:http://mapp.cc/xweibo/');
+  header('Location:http://xweibo.mapp.cc/');
   die;
 }
 
@@ -75,7 +75,7 @@ HTML;
   }
 }
 
-$form_action = 'http://mapp.cc/xweibo/list.php';
+$form_action = 'http://xweibo.mapp.cc/list.php';
 
 /* for paginame bug
 if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']))
@@ -112,7 +112,7 @@ $ms  = $c->user_timeline_by_id($uid, $page);
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="http://mapp.cc/xweibo/list.php">微博批量删</a>
+          <a class="brand" href="http://xweibo.mapp.cc/list.php">微博批量删</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="divider-vertical"></li>
